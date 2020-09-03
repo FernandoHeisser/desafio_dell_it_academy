@@ -11,32 +11,54 @@ body {
     background-color: #339966;
     color: #FFF;
     display: flex;
-    flex-direction: column;
-    padding-top: 1rem;
+    justify-content: space-between;
+    padding-top: 2rem;
     padding-bottom: 5rem;
     padding-left: 2rem;
+    padding-right: 3rem;
     line-height: 1rem;
     width: 100%;
     box-shadow: 5px 10px 10px #404040;
 }
 
-.container header .form-field {
+.container header .left-block {
+    width: 50%;
+}
+
+.container header .right-block {
+    flex-direction: row;
+}
+
+.container header .right-block .form-field {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    margin-top: 1rem;
 }
 
-.container header .form-field button {
+.container header .right-block .form-field p {
+    margin-right: 2rem;
+}
+
+button {
     border: none;
     border-radius: 8px;
     height: 2rem;
-    margin-left: 2rem;
     color: #262626;
-    transition: background-color color 2s;
+    transition: background-color 2s;
     cursor: pointer;
+    background-color: #FFF;
+    align-items: center;
+    justify-content: center;
 }
 
-.container header .form-field button:hover {
+#converter {
+    font-weight: bold;
+}
+
+button:hover {
     background-color: #e6e6e6;
     color: #0d0d0d;
 }

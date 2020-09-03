@@ -1,52 +1,78 @@
-import React from 'react';
+import React, { useState } from 'react';
 
+import Dropzone from './Component/Dropzone';
+import api from './services/api';
 import './styles/App.css';
 
+interface InputOutput {
+  input: string[],
+  output: string[]
+}
 function App() {
+
+  const [file, setFile] = useState<File>();
+  const [input, setInput] = useState<string[]>([]);
+  const [output, setOutput] = useState<string[]>([]);
+
+  async function postFileToApi() {
+    if(input.length === 0 && output.length === 0 && file){
+      const data = new FormData();
+      data.append('file', file);
+      const response = await api.post('execute', data);
+      if(response.status === 200){
+        alert("Arquivo adicionado, agora clique em 'Converter'");
+      }
+    }
+  }
+  function convertFile() {
+    if(input.length === 0 && output.length === 0 && file) {
+      api.get('execute').then(response=>{
+        const data: InputOutput = response.data;
+        setInput(data.input);
+        setOutput(data.output);
+      });
+    }
+  }
+  function reloadPage() {
+    window.location.reload();
+  }
   return (
     <div className="App">
       <div className="container">
         <header>
-          <h1>Conversor de notas escolares</h1>
-          <div className="form-field">
-            <p>Clique no botão 'Adicionar' para adicionar o arquivo texto a ser lido</p>
-            <button>Adicionar</button>
+          <div className="left-block">
+            <h1>Conversor de notas escolares</h1>
+            <br/>
+            <p>1- Clique ou arraste o arquivo na dropzone.</p>
+            <p>2- Clique em Adicionar para fazer o upload do arquivo.</p>
+            <p>3- Clique em Converter para realizar a conversão do arquivo.</p>
+            <p>4- Clique em Atualizar para adicionar outro arquivo.</p>
+          </div>
+          <div className="right-block">
+            <Dropzone onFileUploaded={setFile}/>
+            <div className="form-field">
+                <button onClick={postFileToApi}>Adicionar</button>
+                <button id="converter" onClick={convertFile}>Converter</button>
+                <button onClick={reloadPage}>Atualizar</button>
+            </div>
           </div>
         </header>
         <main>
           <div className="input">
             <h2>Entrada</h2>
             <div className="text-box">
-              <p>Logica Matematica Media C</p>
-              <p>Engenharia de Software Prova1 A</p>
-              <p>Engenharia de Software Prova2 B</p>
-              <p>Banco de Dados Media B</p>
-              <p>Teoria da Computacao Prova1 F</p>
-              <p>Teoria da Computacao Prova2 D</p>
-              <p>qual a média em pontuacao brasileira de Logica Matematica?</p>
-              <p>voce foi aprovado em Engenharia de Software ?</p>
-              <p>qual a media da disciplina de Teoria da computacao?</p>
-              <p>voce foi aprovado em todas as disciplinas?</p>
-              <p>quantos creditos você cursou neste semestre?</p>
-              <p>quantos creditos você concluiu?</p>
-              
+              {input.map((line: string)=>(
+                  <p key={input.indexOf(line)}>{line}</p>
+                ))
+              }
             </div>
           </div>
           <div className="output">
             <h2>Saída</h2>
             <div className="text-box">
-            <p>Logica Matematica Media C</p>
-              <p>Engenharia de Software Prova1 A</p>
-              <p>Engenharia de Software Prova2 B</p>
-              <p>Banco de Dados Media B</p>
-              <p>Teoria da Computacao Prova1 F</p>
-              <p>Teoria da Computacao Prova2 D</p>
-              <p>qual a média em pontuacao brasileira de Logica Matematica?</p>
-              <p>voce foi aprovado em Engenharia de Software ?</p>
-              <p>qual a media da disciplina de Teoria da computacao?</p>
-              <p>voce foi aprovado em todas as disciplinas?</p>
-              <p>quantos creditos você cursou neste semestre?</p>
-              <p>quantos creditos você concluiu?</p>
+              {output.map((line: string)=>(
+                <p key={input.indexOf(line)}>{line}</p>
+              ))}
             </div>
           </div>
         </main>

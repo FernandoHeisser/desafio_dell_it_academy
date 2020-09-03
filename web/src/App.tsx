@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <div className="container">
         <header>
-          <h1>Title</h1>
+          <h1>Conversor de notas escolares</h1>
           <div className="form-field">
             <p>Clique no botão 'Adicionar' para adicionar o arquivo texto a ser lido</p>
             <button>Adicionar</button>
@@ -15,7 +15,7 @@ function App() {
         </header>
         <main>
           <div className="input">
-            <h2>Input</h2>
+            <h2>Entrada</h2>
             <div className="text-box">
               <p>Logica Matematica Media C</p>
               <p>Engenharia de Software Prova1 A</p>
@@ -29,10 +29,11 @@ function App() {
               <p>voce foi aprovado em todas as disciplinas?</p>
               <p>quantos creditos você cursou neste semestre?</p>
               <p>quantos creditos você concluiu?</p>
+              
             </div>
           </div>
           <div className="output">
-            <h2>Output</h2>
+            <h2>Saída</h2>
             <div className="text-box">
             <p>Logica Matematica Media C</p>
               <p>Engenharia de Software Prova1 A</p>

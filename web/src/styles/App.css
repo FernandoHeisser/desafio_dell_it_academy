@@ -18,7 +18,6 @@ body {
     padding-right: 3rem;
     line-height: 1rem;
     width: 100%;
-    box-shadow: 5px 10px 10px #404040;
 }
 
 .container header .left-block {
@@ -34,7 +33,7 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 0 2rem;
+    padding: 0 1rem;
     margin-top: 1rem;
 }
 
@@ -43,6 +42,8 @@ body {
 }
 
 button {
+    font-size: 0.95rem;
+    width: 5rem;
     border: none;
     border-radius: 8px;
     height: 2rem;
@@ -79,7 +80,6 @@ button:hover {
     padding: 2rem;
     padding-top: 0;
     border-radius: 8px;
-    box-shadow: 5px 10px 10px #404040;
 }
 
 .container main .output {
@@ -89,7 +89,6 @@ button:hover {
     padding: 2rem;
     padding-top: 0;
     border-radius: 8px;
-    box-shadow: 5px 10px 10px #404040;
 }
 
 .container main .text-box {

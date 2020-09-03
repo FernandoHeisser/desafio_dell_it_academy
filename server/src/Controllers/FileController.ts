@@ -1,4 +1,4 @@
-import {Request, Response} from 'express';
+import {Request, Response} from 'express'
 
 class FileController {
     execute(request: Request, response: Response) {

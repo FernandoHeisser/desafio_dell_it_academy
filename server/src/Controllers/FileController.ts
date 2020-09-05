@@ -69,8 +69,8 @@ function removeAccents (line: string) {
 function mediaLine(line: string) {
     let lineArray = line.split(' ');
     
-    let gradeLetter = lineArray.pop();
-    let gradeNumber = gradeLetterToNumber(gradeLetter);
+    const gradeLetter = lineArray.pop();
+    const gradeNumber = gradeLetterToNumber(gradeLetter);
 
     lineArray.pop();
     line = lineArray.join(' ');
@@ -153,8 +153,8 @@ function alreadyHasTest1(subjectName: string) {
 function test1Line(line: string) {
     let lineArray = line.split(' ');
     
-    let gradeLetter = lineArray.pop();
-    let gradeNumber = gradeLetterToNumber(gradeLetter);
+    const gradeLetter = lineArray.pop();
+    const gradeNumber = gradeLetterToNumber(gradeLetter);
 
     lineArray.pop();
     line = lineArray.join(' ');
@@ -196,8 +196,8 @@ function test1Line(line: string) {
 function test2Line(line: string) {
     let lineArray = line.split(' ');
     
-    let gradeLetter = lineArray.pop();
-    let gradeNumber = gradeLetterToNumber(gradeLetter);
+    const gradeLetter = lineArray.pop();
+    const gradeNumber = gradeLetterToNumber(gradeLetter);
 
     lineArray.pop();
     line = lineArray.join(' ');
@@ -726,9 +726,13 @@ function checkApprovedAll(line: string) {
         }
     })
 
-    let failNames = fail.map(subject=>{
+    let failNamesNonUnique = fail.map(subject=>{
         return subject.name.charAt(0).toUpperCase() + subject.name.slice(1)
     })
+
+    const failNames = failNamesNonUnique.filter((elem, pos, self)=>{
+        return self.indexOf(elem) == pos;
+    });
 
     let failString = failNames.join(' ');
 
@@ -840,14 +844,18 @@ function checkConcludedCredits() {
 
     const subjectsNames = subjectsNonUnique.filter((elem, pos, self)=>{
         return self.indexOf(elem) == pos;
-    })
+    });
 
-    const subjectsWithCredits  = <{name: string, credits: number}[]>[];
+    const subjectsWithCreditsNonUnique  = <{name: string, credits: number}[]>[];
 
     subjects.map(subject=>{
         if(subjectsNames.includes(subject.name)) {
-            subjectsWithCredits.push(subject);
+            subjectsWithCreditsNonUnique.push(subject);
         }
+    });
+
+    const subjectsWithCredits = subjectsWithCreditsNonUnique.filter((elem, pos, self)=>{
+        return self.indexOf(elem) == pos;
     });
     
     let credits = 0;
@@ -856,7 +864,23 @@ function checkConcludedCredits() {
         credits += subject.credits;
     });
 
-    return `Conclui apenas ${credits} creditos`;
+    let lineArray = (checkStudiedCredits()).split(' ');
+    lineArray.shift();
+    lineArray.shift();
+    lineArray.shift();
+    lineArray.pop();
+
+    let totalCredits = parseInt(lineArray[0]);
+
+    if(credits < totalCredits) {
+
+        return `Conclui apenas ${credits} creditos`;
+
+    } else {
+
+        return `Conclui todos os ${credits} creditos`;
+
+    }
 }
 
 function howManyLine(line: string) {

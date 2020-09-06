@@ -25,7 +25,7 @@ const subjects = [
 
 var studentAverages = <subject[]>[];
 var studentTests = <test[]>[];
-var studentAveragesTests = <subject[]>[];
+var studentAveragesTests = <subject[]>[];   
 
 function gradeLetterToNumber(grade: string | undefined) {
     
@@ -86,7 +86,8 @@ function mediaLine(line: string) {
             const subject: subject = {
                 name: line,
                 average: gradeNumber
-            }
+            };
+
             studentAverages.push(subject);
             line = '';
         }
@@ -172,7 +173,7 @@ function test1Line(line: string) {
                 subjectName: line,
                 testNumber: 1,
                 grade: gradeNumber
-            }
+            };
 
             if(alreadyHasTest(test)) {
 
@@ -330,7 +331,7 @@ function getAverage(subjectName: string) {
         studentAveragesTests.push({
             name: subjectName,
             average: average
-        })
+        });
 
         line = `A media em ${subjectNameCapitalized} é ${average}`;
 
@@ -384,10 +385,10 @@ function whichAverageLine(line: string) {
 
         const subjectNames = studentAverages.map(subject=>{
             return subject.name;
-        })
+        });
         const testSubjectNames = studentTests.map(test=>{
             return test.subjectName;
-        })
+        });
 
         let testSubjectName = lineArray;
 
@@ -724,11 +725,11 @@ function checkApprovedAll(line: string) {
         } else {
             return subject.name;
         }
-    })
+    });
 
     let failNamesNonUnique = fail.map(subject=>{
         return subject.name.charAt(0).toUpperCase() + subject.name.slice(1)
-    })
+    });
 
     const failNames = failNamesNonUnique.filter((elem, pos, self)=>{
         return self.indexOf(elem) == pos;
@@ -809,7 +810,7 @@ function checkStudiedCredits() {
 
     const subjectsNames = subjectsNonUnique.filter((elem, pos, self)=>{
         return self.indexOf(elem) == pos;
-    })
+    });
 
     const subjectsWithCredits  = <{name: string, credits: number}[]>[];
 

@@ -24,7 +24,7 @@ function App() {
         const response = await api.post('execute', data);
 
         if(response.status === 200) {
-          alert("Upload do arquivo conclúido, clique em 'Converter'");
+          alert("Upload do arquivo concluído, clique em 'Converter'");
         }
 
       } catch {

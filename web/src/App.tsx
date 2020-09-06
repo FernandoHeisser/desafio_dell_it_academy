@@ -24,7 +24,7 @@ function App() {
         const response = await api.post('execute', data);
 
         if(response.status === 200) {
-          alert("Arquivo adicionado, agora clique em 'Converter'");
+          alert("Upload do arquivo conclúido, clique em 'Converter'");
         }
 
       } catch {
@@ -54,14 +54,14 @@ function App() {
             <h1>Conversor de notas escolares</h1>
             <br/>
             <p>1- Clique ou arraste o arquivo na dropzone.</p>
-            <p>2- Clique em Adicionar para fazer o upload do arquivo.</p>
+            <p>2- Clique em Upload para fazer o upload do arquivo.</p>
             <p>3- Clique em Converter para realizar a conversão do arquivo.</p>
             <p>4- Clique em Atualizar para adicionar outro arquivo.</p>
           </div>
           <div className="right-block">
             <Dropzone onFileUploaded={setFile}/>
             <div className="form-field">
-                <button onClick={postFileToApi}>Adicionar</button>
+                <button onClick={postFileToApi}>Upload</button>
                 <button id="converter" onClick={convertFile}>Converter</button>
                 <button onClick={reloadPage}>Atualizar</button>
             </div>

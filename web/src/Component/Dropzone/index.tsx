@@ -38,7 +38,7 @@ const Dropzone: React.FC<Props> = ({onFileUploaded}) => {
                 :
                 <p>
                     <FiUpload />
-                    Adicione o arquivo texto
+                    Anexe o arquivo texto
                 </p>
             )
         }

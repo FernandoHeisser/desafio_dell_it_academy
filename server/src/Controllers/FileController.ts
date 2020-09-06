@@ -1062,7 +1062,11 @@ function classifyLine(line: string) {
 
 class FileController {
     upload(request: Request, response: Response){
-        return response.send('Arquivo Adicionado');
+        if(request.params.fileNameValidator === '406') {
+            return response.status(406).send('Arquivo inválido');
+        } else {
+            return response.status(200).send('Arquivo Adicionado');
+        }
     }
     
     execute(request: Request, response: Response) {
@@ -1080,7 +1084,10 @@ class FileController {
             inputArray.push(line);
 
             const newLine = classifyLine(removeAccents(line));
-            outputArray.push(newLine);
+
+            if(newLine !== '') {
+                outputArray.push(newLine);
+            }
         });
 
         rl.on('close', function() {

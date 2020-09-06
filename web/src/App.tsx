@@ -18,9 +18,19 @@ function App() {
     if(input.length === 0 && output.length === 0 && file){
       const data = new FormData();
       data.append('file', file);
-      const response = await api.post('execute', data);
-      if(response.status === 200){
-        alert("Arquivo adicionado, agora clique em 'Converter'");
+
+      try {
+
+        const response = await api.post('execute', data);
+
+        if(response.status === 200) {
+          alert("Arquivo adicionado, agora clique em 'Converter'");
+        }
+
+      } catch {
+
+        alert('Arquivo inválido, apenas arquivos .txt são aceitos')
+
       }
     }
   }
@@ -71,7 +81,7 @@ function App() {
             <h2>Saída</h2>
             <div className="text-box">
               {output.map((line: string)=>(
-                <p key={input.indexOf(line)}>{line}</p>
+                <p key={output.indexOf(line)}>{line}</p>
               ))}
             </div>
           </div>
